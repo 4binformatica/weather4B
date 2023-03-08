@@ -1,0 +1,13 @@
+APPLICAZIONE METEO PER TUTTA ITALIA HTML/CSS/JS
+
+Barra di ricerca
+Mappa meteo
+Immaginine con novulette
+Giorni della settimana
+Cicli lcicli luUmidità
+Vento
+Quantità di pioggia (Precipitazioni in mm)
+Quando tramonta e quando sorge il sole 
+Temperatura massima, temperatura minima
+Previsione dei gradi della giornata per ore
+Allerta meteo

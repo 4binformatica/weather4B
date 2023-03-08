@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="js/script.js"></script>
+        <title>Meteo4b</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="searchBarContainer">
+                <input id="searchBar" type="text" class="searchBar" placeholder="Search for a city..."></input>
+                <i onclick="search()" class="fas fa-search"></i> 
+            </div>
+        </div>
+        <div class="containerTwo">
+            <div class="containerThree">
+                <div class="weatherContainer">
+                    <div class="weatherIcon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <div class="weatherInfo">
+                        <div class="temperature">
+                            <span>26</span>
+                            <span>&deg;C</span>
+                        </div>
+                        <div class="description">
+                            <span>Cloudy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="locationContainer">
+                    <div class="location">
+                        <span>City</span>
+                    </div>
+                    <div class="date">
+                        <span>Day</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>            

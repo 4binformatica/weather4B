@@ -1,0 +1,109 @@
+:root {
+    --paynes-gray: #3a606eff;
+    --slate-gray: #607b7dff;
+    --battleship-gray: #828e82ff;
+    --sage: #aaae8eff;
+    --platinum: #e0e0e0ff;
+    --font:  -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Path: style.css */
+
+body {
+    background-color: var(--paynes-gray);
+    color: var(--platinum);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    transition: all 0.5s ease;
+}
+
+.searchBarContainer:hover {
+    transform: scale(1.05);
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 5px;
+    background-color: var(--slate-gray);
+    color: var(--platinum);
+    font-family: var(--font);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    transition: all 0.5s ease;
+}
+
+.searchBar:hover {
+    box-shadow: 0px 0px 10px 10px rgb(41, 67, 77);
+}
+
+
+.searchBar:focus {
+    outline: none;
+}
+
+.searchBar::placeholder {
+    color: var(--platinum);
+    opacity: 60%;
+}
+
+.searchBar:focus::placeholder {
+    color: var(--platinum);
+    opacity: 90%;
+}
+
+i.fa-search {
+    position: relative;
+    right: 30px;
+}
+
+.containerTwo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15rem 0;
+    transition: all 0.5s ease;
+}
+
+.containerThree {
+    width: 100%;
+    height: 300px;
+    max-width: 1000px;
+    max-height: 700px;
+    padding: 1rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 5px;
+    background-color: var(--slate-gray);
+    color: var(--platinum);
+    font-family: var(--font);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    transition: all 0.5s ease;
+}
+
+.containerThree:hover {
+    box-shadow: 0px 0px 10px 10px rgb(41, 67, 77);
+    transform: scale(1.05);
+}
+
+
+
+
+
+
