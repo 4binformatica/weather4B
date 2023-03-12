@@ -1,0 +1,14 @@
+:root {
+    --paynes-gray: #3a606eff;
+    --slate-gray: #607b7dff;
+    --battleship-gray: #828e82ff;
+    --sage: #aaae8eff;
+    --platinum: #e0e0e0ff;
+    --font:  -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: var(--paynes-gray);
+    color: var(--platinum);
+    overflow-x: hidden;
+}

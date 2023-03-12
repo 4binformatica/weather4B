@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="js/script.js"></script>
@@ -10,34 +11,98 @@
         <div class="container">
             <div class="searchBarContainer">
                 <input id="searchBar" type="text" class="searchBar" placeholder="Search for a city..."></input>
-                <i onclick="search()" class="fas fa-search"></i> 
+                <i onclick="search()" class="fas fa-search"></i></a>
             </div>
         </div>
-        <div class="containerTwo">
-            <div class="containerThree">
-                <div class="weatherContainer">
-                    <div class="weatherIcon">
-                        <i class="fas fa-cloud-sun"></i>
+        <a href="src/who.html">
+            <div class="who">
+                <i class="fa-solid fa-question"></i>
+            </div>
+        </a>
+        <div class="card-container">
+            <div class="card hot">
+                <h2 class="title">Today</h2>
+                <div class="icon-temp">
+                    <div class="icon">
+                        <i class="fa-solid fa-sun"></i>
                     </div>
-                    <div class="weatherInfo">
-                        <div class="temperature">
-                            <span>26</span>
-                            <span>&deg;C</span>
-                        </div>
-                        <div class="description">
-                            <span>Cloudy</span>
-                        </div>
+                    <div>
+                        <span class="temp">32</span>&#8451;
                     </div>
                 </div>
-                <div class="locationContainer">
-                    <div class="location">
-                        <span>City</span>
-                    </div>
-                    <div class="date">
-                        <span>Day</span>
-                    </div>
+                <div class="description">
+                    <p><strong>Sunny</strong></p>
+                    <p>Humidity: 50%</p>
+                    <p>Wind: 5 km/h</p>
                 </div>
             </div>
+            <div class="card warm">
+                <h2 class="title">Tomorrow</h2>
+                <div class="icon-temp">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+                    <div>
+                        <span class="temp">28</span>&#8451;
+                    </div>
+                </div>
+                <div class="description">
+                    <p><strong>Partly Cloudy</strong></p>
+                    <p>Humidity: 60%</p>
+                    <p>Wind: 10 km/h</p>
+                </div>
+            </div>
+            <div class="card cold">
+                <h2 class="title">Day 3</h2>
+                <div class="icon-temp">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud-rain"></i>
+                    </div>
+                    <div>
+                        <span class="temp">14</span>&#8451;
+                    </div>
+                </div>
+                <div class="description">
+                    <p><strong>Rainy</strong></p>
+                    <p>Humidity: 70%</p>
+                    <p>Wind: 15 km/h</p>
+                </div>
+            </div>
+            <div class="card cold">
+                <h2 class="title">Day 4</h2>
+                <div class="icon-temp">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud-bolt"></i>
+                    </div>
+                    <div>
+                        <span class="temp">12</span>&#8451;
+                    </div>
+                </div>
+                <div class="description">
+                    <p><strong>Thunderstorm</strong></p>
+                    <p>Humidity: 80%</p>
+                    <p>Wind: 20 km/h</p>
+                </div>
+            </div>
+            <div class="card warm">
+                <h2 class="title">Day 5</h2>
+                <div class="icon-temp">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+                    <div>
+                        <span class="temp">26</span>&#8451;
+                    </div>
+                </div>
+                <div class="description">
+                    <p><strong>Mostly Sunny</strong></p>
+                    <p>Humidity: 55%</p>
+                    <p>Wind: 8 km/h</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Created by <a href="https://github.com/4binformatica" target="_blank">4B</a></p>
         </div>
     </body>
 </html>            
