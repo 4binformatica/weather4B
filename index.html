@@ -3,7 +3,8 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://kit.fontawesome.com/be88b29395.js" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
         <title>Meteo4b</title>
     </head>
@@ -11,7 +12,7 @@
         <div class="container">
             <div class="searchBarContainer">
                 <input id="searchBar" type="text" class="searchBar" placeholder="Search for a city..."></input>
-                <i onclick="search()" class="fas fa-search"></i></a>
+                <i onclick="search()" class="fas fa-search"></i>
             </div>
         </div>
         <a href="src/who.html">
@@ -19,21 +20,25 @@
                 <i class="fa-solid fa-question"></i>
             </div>
         </a>
+
         <div class="card-container">
-            <div class="card hot">
+            <div id="day1" class="card hot">
                 <h2 class="title">Today</h2>
                 <div class="icon-temp">
                     <div class="icon">
-                        <i class="fa-solid fa-sun"></i>
+                        <i id="dayicon1" class="fa-solid fa-sun"></i>
                     </div>
                     <div>
-                        <span class="temp">32</span>&#8451;
+                        <span class="temp" id="Temp1">32</span>
+                    </div>
+                    <div>
+                        <span class="maxTemp" id="MaxTemp1">35° / </span> <span class="minTemp" id="MinTemp1"> 29°</span>
                     </div>
                 </div>
                 <div class="description">
                     <p><strong>Sunny</strong></p>
-                    <p>Humidity: 50%</p>
-                    <p>Wind: 5 km/h</p>
+                    <p id="Humidity1">Humidity: 50%</p>
+                    <p id="Wind1">Wind: 5 km/h</p>
                 </div>
             </div>
             <div class="card warm">
@@ -43,13 +48,16 @@
                         <i class="fa-solid fa-cloud-sun"></i>
                     </div>
                     <div>
-                        <span class="temp">28</span>&#8451;
+                        <span class="temp" id="Temp2">28</span>
+                    </div>
+                    <div>
+                        <span class="maxTemp" id="MaxTemp2">35° / </span> <span class="minTemp" id="MinTemp2"> 29°</span>
                     </div>
                 </div>
                 <div class="description">
                     <p><strong>Partly Cloudy</strong></p>
-                    <p>Humidity: 60%</p>
-                    <p>Wind: 10 km/h</p>
+                    <p id="Humidity2">Humidity: 60%</p>
+                    <p id="Wind2">Wind: 10 km/h</p>
                 </div>
             </div>
             <div class="card cold">
@@ -59,7 +67,10 @@
                         <i class="fa-solid fa-cloud-rain"></i>
                     </div>
                     <div>
-                        <span class="temp">14</span>&#8451;
+                        <span class="temp">14</span>
+                    </div>
+                    <div>
+                        <span class="maxTemp" id="MaxTemp3">35° / </span> <span class="minTemp" id="MinTemp3"> 29°</span>
                     </div>
                 </div>
                 <div class="description">
@@ -75,7 +86,10 @@
                         <i class="fa-solid fa-cloud-bolt"></i>
                     </div>
                     <div>
-                        <span class="temp">12</span>&#8451;
+                        <span class="temp">12</span>
+                    </div>
+                    <div>
+                        <span class="maxTemp" id="MaxTemp4">35° / </span> <span class="minTemp" id="MinTemp4"> 29°</span>
                     </div>
                 </div>
                 <div class="description">
@@ -91,7 +105,10 @@
                         <i class="fa-solid fa-cloud-sun"></i>
                     </div>
                     <div>
-                        <span class="temp">26</span>&#8451;
+                        <span class="temp">26</span>
+                    </div>
+                    <div>
+                        <span class="maxTemp" id="MaxTemp5">35° / </span> <span class="minTemp" id="MinTemp5"> 29°</span>
                     </div>
                 </div>
                 <div class="description">

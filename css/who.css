@@ -10,5 +10,87 @@
 body {
     background-color: var(--paynes-gray);
     color: var(--platinum);
-    overflow-x: hidden;
+    overflow: hidden;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+
+}
+
+.who {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    color: var(--platinum);
+    overflow: hidden;
+}
+
+h1 {
+    font-family: var(--font);
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.cardWho {
+    padding: 1rem;
+    width: 90%;
+    height: auto;
+    background-color: var(--slate-gray);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 3px rgb(41, 67, 77);
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font);
+    transition: all 0.5s ease;
+}
+
+.p {
+    font-family: var(--font);
+    color: var(--platinum);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    padding: 0 1rem;
+    line-height: 1.5;
+
+}
+
+.back {
+    /* posizionalo in alto a destra con la posizione fixed */
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    margin: 1rem;
+    font-size: 25px;
+    color: #fff;
+    border-radius: 20%;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #fff;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px 3px rgb(41, 67, 77);
+}
+
+.back:active {
+    transform: scale(0.95);
+}
+
+
