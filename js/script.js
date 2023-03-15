@@ -20,59 +20,67 @@ var search = function () {
   let weather = getWeather(input);
   let astronimicInfo = getAstronimicInfo(input);
 
-  let day1date = weather.list[0].dt_txt;
-  let day2date = weather.list[8].dt_txt;
-  let day3date = weather.list[16].dt_txt;
-  let day4date = weather.list[24].dt_txt;
-  let day5date = weather.list[32].dt_txt;
 
-  //get the monday, tuesday, wednesday, thursday, friday
-  let day1 = giorniSettimana[new Date(day1date).getDay()]
-  let day2 = giorniSettimana[new Date(day2date).getDay()]
-  let day3 = giorniSettimana[new Date(day3date).getDay()]
-  let day4 = giorniSettimana[new Date(day4date).getDay()]
-  let day5 = giorniSettimana[new Date(day5date).getDay()]
+  let daydate = [];
+  daydate[0] = weather.list[0].dt_txt;
+  daydate[1] = weather.list[8].dt_txt;
+  daydate[2] = weather.list[16].dt_txt;
+  daydate[3] = weather.list[24].dt_txt;
+  daydate[4] = weather.list[32].dt_txt;
 
+  let day = [];
+  day[0] = giorniSettimana[new Date(daydate[0]).getDay()];
+  day[1] = giorniSettimana[new Date(daydate[1]).getDay()];
+  day[2] = giorniSettimana[new Date(daydate[2]).getDay()];
+  day[3] = giorniSettimana[new Date(daydate[3]).getDay()];
+  day[4] = giorniSettimana[new Date(daydate[4]).getDay()];
 
+  let dayTemp = [];
+  dayTemp[0] = weather.list[0].main.temp;
+  dayTemp[1] = weather.list[8].main.temp;
+  dayTemp[2] = weather.list[16].main.temp;
+  dayTemp[3] = weather.list[24].main.temp;
+  dayTemp[4] = weather.list[32].main.temp;
 
+  let dayTempMin = [];
+  dayTempMin[0] = weather.list[0].main.temp_min;
+  dayTempMin[1] = weather.list[8].main.temp_min;
+  dayTempMin[2] = weather.list[16].main.temp_min;
+  dayTempMin[3] = weather.list[24].main.temp_min;
+  dayTempMin[4] = weather.list[32].main.temp_min;
 
-  console.log(day1date);
-  console.log(day2date);
-  console.log(day3date);
-  console.log(day4date);
-  console.log(day5date);
+  let dayTempMax = [];
+  dayTempMax[0] = weather.list[0].main.temp_max;
+  dayTempMax[1] = weather.list[8].main.temp_max;
+  dayTempMax[2] = weather.list[16].main.temp_max;
+  dayTempMax[3] = weather.list[24].main.temp_max;
+  dayTempMax[4] = weather.list[32].main.temp_max;
 
-  console.log(day1);
-  console.log(day2);
-  console.log(day3);
-  console.log(day4);
-  console.log(day5);
+  let dayHumidity = [];
+  dayHumidity[0] = weather.list[0].main.humidity;
+  dayHumidity[1] = weather.list[8].main.humidity;
+  dayHumidity[2] = weather.list[16].main.humidity;
+  dayHumidity[3] = weather.list[24].main.humidity;
+  dayHumidity[4] = weather.list[32].main.humidity;
 
+  let dayWind = [];
+  dayWind[0] = weather.list[0].wind.speed;
+  dayWind[1] = weather.list[8].wind.speed;
+  dayWind[2] = weather.list[16].wind.speed;
+  dayWind[3] = weather.list[24].wind.speed;
+  dayWind[4] = weather.list[32].wind.speed;
 
-
-  console.log(weather);
-  console.log(astronimicInfo);
-
-  console.log("day1: " + day1);
-  console.log("day2: " + day2);
-  console.log("day3: " + day3);
-  console.log("day4: " + day4);
-  console.log("day5: " + day5);
-
-
-  console.log("temp: " + temp + " tempF: " + tempF + " tempC: " + tempC + " tempK: " + tempK);
-  console.log("tempMin: " + tempMin + " tempMinF: " + tempMinF + " tempMinC: " + tempMinC + " tempMinK: " + tempMinK);
-  console.log("tempMax: " + tempMax + " tempMaxF: " + tempMaxF + " tempMaxC: " + tempMaxC + " tempMaxK: " + tempMaxK);
-  console.log("humidity: " + humidity);
-  console.log("pressure: " + pressure);
+  let dayWeatherId = [];
+  dayWeatherId[0] = weather.list[0].weather[0].id;
+  dayWeatherId[1] = weather.list[8].weather[0].id;
+  dayWeatherId[2] = weather.list[16].weather[0].id;
+  dayWeatherId[3] = weather.list[24].weather[0].id;
+  dayWeatherId[4] = weather.list[32].weather[0].id;
 
   let sunrise = astronimicInfo.results.sunrise;
   let sunset = astronimicInfo.results.sunset;
   let dayLength = astronimicInfo.results.day_length;
 
-  console.log("sunrise: " + sunrise);
-  console.log("sunset: " + sunset);
-  console.log("dayLength: " + dayLength);
 
   const Temp1 = document.getElementById("Temp1");
   const MaxTemp1 = document.getElementById("MaxTemp1");
@@ -80,13 +88,13 @@ var search = function () {
   const Humidity1 = document.getElementById("Humidity1");
   const Wind1 = document.getElementById("Wind1");
 
-  Temp1.innerHTML = tempC + "°C";
-  MinTemp1.innerHTML = tempMinC + "°C";
-  MaxTemp1.innerHTML = tempMaxC + "°C" + " /";
-  Humidity1.innerHTML = "Humidity: " + humidity + "%";
-  Wind1.innerHTML = "Wind: " + wind + "m/s";
+  Temp1.innerHTML = Math.round(dayTemp[0] - 273.15) + "°C";
+  MaxTemp1.innerHTML = Math.round(dayTempMax[0] - 273.15) + "°C";
+  MinTemp1.innerHTML = Math.round(dayTempMin[0] - 273.15) + "°C";
+  Humidity1.innerHTML = "Humidity: " + dayHumidity[0] + "%";
+  Wind1.innerHTML = "Wind: " + dayWind[0] + "m/s";
   
-  changeCard(tempC, "day1", "dayicon1", weather.weather[0].id);
+  changeCardIcon(Math.round(dayTemp[0] - 273.15), "day1", "dayicon1", dayWeatherId[0]);
 
   
   
