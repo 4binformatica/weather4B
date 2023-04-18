@@ -20,8 +20,10 @@ var search = function () {
   let weather = getWeather(input);
   let astronimicInfo = getAstronimicInfo(input);
 
+  console.log(weather);
 
-  let daydate = [];
+
+  /*let daydate = [];
   daydate[0] = weather.list[0].dt_txt;
   daydate[1] = weather.list[8].dt_txt;
   daydate[2] = weather.list[16].dt_txt;
@@ -94,13 +96,113 @@ var search = function () {
   Humidity1.innerHTML = "Humidity: " + dayHumidity[0] + "%";
   Wind1.innerHTML = "Wind: " + dayWind[0] + "m/s";
   
-  changeCardIcon(Math.round(dayTemp[0] - 273.15), "day1", "dayicon1", dayWeatherId[0]);
+  changeCard(Math.round(dayTemp[0] - 273.15), "day1", "dayicon1", dayWeatherId[0]);*/
 
-  
-  
+  let daydate = [];
+  let day = [];
+  let dayTemp = [];
+  let dayTempMin = [];
+  let dayTempMax = [];
+  let dayHumidity = [];
+  let dayWind = [];
+  let dayWeatherId = [];
+
+    //get the current day
+    let now = new Date();
+    //add the number of days to the current day
+    now.setDate(now.getDate());
+    //get the day of the week
+    let dayOfWeek = now.getDay();
+    //get the day of the month
+    let dayOfMonth = now.getDate();
+    //get the month
+    let month = now.getMonth() + 1;
+    //get the hours
+    let hours = now.getHours();
+    //get the minutes
+    let minutes = now.getMinutes();
+
+    //if the month is less than 10, add a zero
+    if(month < 10){
+      month = "0" + month;
+    }
+
+    for(var i = 0; i < 5; i++){
+      if(i == 0){
+        //add the zero at the month if it's less than 10
+        console.log("today " + now.getFullYear() + "-" + (month) + "-" + dayOfMonth + " " + hours + ":" + minutes + ":00");
+        daydate[i] = weather.list[0].dt_txt;
+        //how many elements in the array are the current day
+        let count = 0;
+        for(var j = 0; j < weather.list.length; j++){
+          //confront the current day with the day in the array
+          if(weather.list[j].dt_txt.includes(now.getFullYear() + "-" + (month) + "-" + dayOfMonth)){
+            count++;
+          }
+        }
+        
+
+        console.log("count: " + count);
+
+        //get the data from the near future
+        for(var j = 0; j < count; j++){
+          let weatherDate = new Date(weather.list[j].dt_txt);
+          let hoursDiff = Math.abs(weatherDate.getHours() - hours);
+          let minutesDiff = Math.abs(weatherDate.getMinutes() - minutes);
+          if(hoursDiff < 3 && minutesDiff < 60){
+            dayTemp[i] = weather.list[j].main.temp;
+            dayTempMin[i] = weather.list[j].main.temp_min;
+            dayTempMax[i] = weather.list[j].main.temp_max;
+            dayHumidity[i] = weather.list[j].main.humidity;
+            dayWind[i] = weather.list[j].wind.speed;
+            dayWeatherId[i] = weather.list[j].weather[0].id;
+          }
+        }
+      }else{
+        //put the weather of the next days in the array (the weather of the next day is at 12:00)
+        daydate[i] = weather.list[i*8].dt_txt;
+        dayTemp[i] = weather.list[i*8].main.temp;
+        dayTempMin[i] = weather.list[i*8].main.temp_min;
+        dayTempMax[i] = weather.list[i*8].main.temp_max;
+        dayHumidity[i] = weather.list[i*8].main.humidity;
+        dayWind[i] = weather.list[i*8].wind.speed;
+        dayWeatherId[i] = weather.list[i*8].weather[0].id;
+      }
+    }
 
 
 
+
+
+      
+
+
+
+
+  // kap non funziona nulla AAAAAAAA
+
+  let sunrise = astronimicInfo.results.sunrise;
+  let sunset = astronimicInfo.results.sunset;
+  let dayLength = astronimicInfo.results.day_length;
+
+  for(let i = 0; i < 5; i++){
+    console.log(day[i] + " " + dayTemp[i] + " " + dayTempMin[i] + " " + dayTempMax[i] + " " + dayHumidity[i] + " " + dayWind[i] + " " + dayWeatherId[i]);
+    const Temp = document.getElementById("Temp" + (i+1));
+    const MaxTemp = document.getElementById("MaxTemp" + (i+1));
+    const MinTemp = document.getElementById("MinTemp" + (i+1));
+    const Humidity = document.getElementById("Humidity" + (i+1));
+    const Wind = document.getElementById("Wind" + (i+1));
+    const city = document.getElementById("city");
+
+    Temp.innerHTML = Math.round(dayTemp[i] - 273.15) + "°C";
+    MaxTemp.innerHTML = Math.round(dayTempMax[i] - 273.15) + "°C";
+    MinTemp.innerHTML = Math.round(dayTempMin[i] - 273.15) + "°C";
+    Humidity.innerHTML = "Humidity: " + dayHumidity[i] + "%";
+    Wind.innerHTML = "Wind: " + dayWind[i] + "m/s";
+    city.innerHTML = weather.city.name + ", " + weather.city.country;
+    
+    changeCard(Math.round(dayTemp[i] - 273.15), "day" + (i+1), "dayicon" + (i+1), dayWeatherId[i]);
+  }
 }
 
 var getWeather = function (city) {
@@ -328,6 +430,8 @@ var changeCard = function (temp, cardday, iconid, weather) {
       default:
         icon.className = clear;
         break;
+         
+        
         
     }
     

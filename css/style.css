@@ -96,6 +96,14 @@ i.fa-search {
     transform: scale(0.95);
 }
 
+.city-selected {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    font: 700 20px var(--font);
+}
+
 .card-container {
     display: flex;
     justify-content: center;
