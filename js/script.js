@@ -392,36 +392,16 @@ var changeCard = function (temp, cardday, iconid, weather) {
         icon.src = cloudy;
         break;
       case 800:
-        if(isDayTime){
-          icon.src = sunny;
-        }
-        else{
-          icon.src = night;
-        }
+        icon.src = sunny;
         break;
       case 801:
-        if(isDayTime){
-          icon.src = cloudyday1;
-        }
-        else{
-          icon.src = cloudynight1;
-        }
+        icon.src = cloudyday1;
         break;
       case 802:
-        if(isDayTime){
-          icon.src = cloudyday2;
-        }
-        else{
-          icon.src = cloudynight2;
-        }
+        icon.src = cloudyday2;
         break;
       case 803:
-        if(isDayTime){
-          icon.src = cloudyday3;
-        }
-        else{
-          icon.src = cloudynight3;
-        }
+        icon.src = cloudyday3;
         break;
       case 804:
         icon.src = cloudy;
@@ -429,14 +409,5 @@ var changeCard = function (temp, cardday, iconid, weather) {
       default:
         icon.src = sunny;
         break;
-
-
-
-
-
-      
     }
-    
-
-
 }
