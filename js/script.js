@@ -28,18 +28,55 @@ weather_sunset = "img/weather-sunset.svg";
 weather_sprite = "img/weather-sprite.svg";
 weather = "img/weather.svg";
 
+var mymap = null;
+var marker = null;
+
 
 
 
 let giorniSettimana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
+
+$(document).ready(function() {
+  var searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('input', function () {
+  console.log(searchBar.value);
+  suggestCity(searchBar.value);
+});
+});
+
+
+function searchCity(query) {
+  var url = `https://api.openweathermap.org/data/2.5/find?q=${query}&type=like&sort=population&appid=${API_KEY}&units=metric&lang=it`;
+
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      var cities = data.list.map(city => {
+        return {
+          name: city.name,
+          country: city.sys.country,
+          lat: city.coord.lat,
+          lon: city.coord.lon
+        };
+      });
+
+      return cities;
+    });
+}
+
+function suggestCity(query) {
+  searchCity(query).then(cities => {
+    // Usa la lista di città per fornire i suggerimenti di ricerca
+    var suggestions = cities.map(city => `${city.name}, ${city.country}`);
+    console.log(suggestions);
+  });
+}
+
 var search = function () {
-  //reset the map
-  document.getElementById('map').innerHTML = "";
-  //reset leaflet map
-  var map = L.map('map').setView([0, 0], 13);
-  //to-do
+  //reset leaflet map and layer before searching
+
 
 
   console.log("searching");
@@ -128,10 +165,12 @@ var search = function () {
   document.getElementById('clouds').innerHTML = cloudsText;
   document.getElementById('visibility').innerHTML = visibilityText;
 
-
-  var map = L.map('map').setView([lat, lon], 13);
-  var layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
-  map.addLayer(layer);
+  if (mymap == null) {
+    initMap(lat, lon);
+  }
+  else {
+    updateMap(lat, lon);
+  }
 
   document.getElementById('lat').innerHTML = latText;
   document.getElementById('lon').innerHTML = lonText;
@@ -190,6 +229,30 @@ $(document).ready(function () {
     }
   });
 });  
+
+function initMap(lat, lng) {
+  if (mymap !== null) {
+    mymap.remove();
+  }
+
+  mymap = L.map('map').setView([lat, lng], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+      '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+  }).addTo(mymap);
+
+  marker = L.marker([lat, lng]).addTo(mymap);
+}
+
+function updateMap(lat, lng) {
+  if (mymap !== null && marker !== null) {
+    mymap.setView([lat, lng], 13);
+    marker.setLatLng([lat, lng]);
+  }
+}
 
 function convertTo24(timeString) {
   var timeParts = timeString.split(/:|\s/);
