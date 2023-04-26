@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://kit.fontawesome.com/be88b29395.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
         <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
         <script src="js/script.js"></script>
         <title>Meteo4b</title>
@@ -16,16 +16,14 @@
                 <i onclick="search()" class="fas fa-search"></i>
             </div>
         </div>
-        <a href="src/who.html">
-            <div class="who">
-                <i class="fa-solid fa-question"></i>
-            </div>
-        </a>
         <div class="card-container">
             <div class="card" id="card">
                 <div class="card-body-left">
                     <div class="city">
-                        <h1 id="cityName">cityName</h1>
+                        <div class="cityI">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <h1 id="cityName">cityName</h1>
+                        </div>
                         <h2 id="date">date</h2>
                     </div>
                     <div class="weather-container">
@@ -33,9 +31,15 @@
                             <div class="icon-weather">
                                 <img id="icon" src="img/cloudy-day-1.svg" alt="icon">
                                 <div class="sun">
-                                    <h2 id="sunrise">sunrise</h2>
+                                    <div class="sunrise">
+                                        <i class="fa-solid fa-sunrise"></i>
+                                        <h2 id="sunrise">sunrise</h2>
+                                    </div>
                                     <h2>/</h2>
-                                    <h2 id="sunset">sunset</h2>
+                                    <div class="sunset">
+                                        <i class="fa-solid fa-sunset"></i>
+                                        <h2 id="sunset">sunset</h2>
+                                    </div>
                                 </div>
                             </div>
                             <div class="temp">
@@ -45,6 +49,7 @@
                                         <i class="fa-solid fa-temperature-low"></i>
                                         <h2 id="tempMin">tempMin</h2>
                                     </div>
+                                    <h2>/</h2>
                                     <div class="tempMax">
                                         <i class="fa-solid fa-temperature-high"></i>
                                         <h2 id="tempMax">tempMax</h2>
@@ -54,23 +59,39 @@
                         </div>
                         <div class="more-info">
                             <div class="info">
-                                <strong><h2>Humidity:</h2></strong>
+                                <div class="infoI">
+                                    <i class="fa-solid fa-droplet-percent"></i>
+                                    <strong><h2>Humidity:</h2></strong>
+                                </div>
                                 <h2 id="humidity">humidity</h2>
                             </div>
                             <div class="info">
-                                <strong><h2>Wind:</h2></strong>
+                                <div class="infoI">
+                                    <i class="fa-solid fa-wind"></i>
+                                    <strong><h2>Wind:</h2></strong>
+                                </div>
                                 <h2 id="wind">wind</h2>
                             </div>
                             <div class="info">
-                                <strong><h2>Pressure:</h2></strong>
+                                <div class="infoI">
+                                    <i class="fa-solid fa-tachometer-alt-average"></i>
+                                    <strong><h2>Pressure:</h2></strong>
+                                </div>                 
                                 <h2 id="pressure">pressure</h2>
                             </div>
                             <div class="info">
-                                <strong><h2>Clouds:</h2></strong>
+                                <div class="infoI">
+                                    <i class="fa-solid fa-cloud"></i>
+                                    <strong><h2>Clouds:</h2></strong>
+                                </div>                        
                                 <h2 id="clouds">clouds</h2>
                             </div>
                             <div class="info">
-                                <strong><h2>Visibility:</h2></strong>
+                                <div class="infoI">
+                                    <i class="fa-solid fa-cloud-fog"></i>
+                                    <strong><h2>Visibility:</h2></strong>
+                                </div>
+                                
                                 <h2 id="visibility">visibility</h2>
                             </div>
                         </div>
@@ -83,8 +104,7 @@
                     <div class="coord">
                         <h2 id="lat">lat</h2>
                         <h2>/</h2>
-                        <h2 id="lon">lon</h2>
-                        
+                        <h2 id="lon">lon</h2> 
                     </div>
                 </div>
             </div>
