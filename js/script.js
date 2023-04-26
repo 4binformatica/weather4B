@@ -37,8 +37,10 @@ let giorniSettimana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', '
 var search = function () {
   //reset the map
   document.getElementById('map').innerHTML = "";
-  //reset letfleg map
-  
+  //reset leaflet map
+  var map = L.map('map').setView([0, 0], 13);
+  //to-do
+
 
   console.log("searching");
   let input = document.getElementById('searchBar').value
