@@ -1,18 +1,17 @@
 :root {
-    --paynes-gray: #3a606eff;
-    --slate-gray: #607b7dff;
-    --battleship-gray: #828e82ff;
-    --sage: #aaae8eff;
-    --platinum: #e0e0e0ff;
+    --celadon: #1d2d44ff; 
+    --prussian-blue: #3e5c76ff; 
+    --picos-gray: #3e5c76ff;  
+    --silver-lake-blue: #48cabff; 
+    --rich-black: #0d1321ff; 
     --font:  -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 
 /* Path: style.css */
 
 body {
-    background-color: var(--paynes-gray);
-    color: var(--platinum);
+    background-color: var(--celadon);
+    color: var(--rich-black);
     overflow-x: hidden;
 }
 
@@ -38,10 +37,10 @@ body {
     width: 100%;
     max-width: 600px;
     padding: 1rem;
-    border: 1px solid var(--slate-gray);
+    border: 1px solid var(--prussian-blue);
     border-radius: 5px;
-    background-color: var(--slate-gray);
-    color: var(--platinum);
+    background-color: var(--prussian-blue);
+    color: var(--rich-black);
     font-family: var(--font);
     font-size: 1.2rem;
     line-height: 1.5;
@@ -58,12 +57,12 @@ body {
 }
 
 .searchBar::placeholder {
-    color: var(--platinum);
+    color: var(--rich-black);
     opacity: 60%;
 }
 
 .searchBar:focus::placeholder {
-    color: var(--platinum);
+    color: var(--rich-black);
     opacity: 90%;
 }
 
@@ -108,10 +107,10 @@ i.fa-search {
     width: 80%;
     height: 700px;
     padding: 2rem;
-    border: 1px solid var(--slate-gray);
+    border: 1px solid var(--prussian-blue);
     border-radius: 5px;
-    background-color: var(--slate-gray);
-    color: var(--platinum);
+    background-color: var(--prussian-blue);
+    color: var(--rich-black);
     font-family: var(--font);
     font-size: 1.2rem;
     line-height: 1.5;
@@ -129,7 +128,7 @@ i.fa-search {
     width: 50%;
     height: 100%;
     padding: 1rem;
-    border-right: 1px solid var(--slate-gray);
+    border-right: 1px solid var(--prussian-blue);
     flex-direction: column;
 }
 
@@ -221,7 +220,7 @@ i.fa-search {
 }
 
 .more-info {
-    border: 3px solid var(--platinum);
+    border: 3px solid var(--rich-black);
     border-radius: 5px;
 }
 
@@ -233,7 +232,7 @@ i.fa-search {
     padding: 0.5rem;
     font-size: 0.7rem;
     padding: 0.5rem;
-    border-bottom: 1px solid var(--platinum);
+    border-bottom: 1px solid var(--rich-black);
 }
 
 .info h2:last-child {
@@ -249,7 +248,7 @@ i.fa-search {
 }
 
 .map {
-    border: 3px solid var(--platinum);
+    border: 3px solid var(--rich-black);
     border-radius: 5px;
     box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
 }

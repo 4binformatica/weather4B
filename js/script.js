@@ -74,6 +74,8 @@ function suggestCity(query) {
   });
 }
 
+
+
 var search = function () {
   //reset leaflet map and layer before searching
 
