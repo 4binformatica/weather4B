@@ -1,218 +1,166 @@
 API_KEY = 'c631f4074106798e9dfdccd9cfe66974';
 
-thunder = "fa-solid fa-cloud-bolt";
-rain = "fa-solid fa-cloud-rain";
-snow = "fa-solid fa-cloud-snow";
-clouds = "fa-solid fa-cloud";
-sun = "fa-solid fa-sun";
-moon = "fa-solid fa-moon";
+cloudyday1 = "img/cloudy-day-1.svg";
+cloudyday2 = "img/cloudy-day-2.svg";
+cloudyday3 = "img/cloudy-day-3.svg";
+cloudynight1 = "img/cloudy-night-1.svg";
+cloudynight2 = "img/cloudy-night-2.svg";
+cloudynight3 = "img/cloudy-night-3.svg";
+cloudy = "img/cloudy.svg";
+sunny = "img/day.svg";
+night = "img/night.svg";
+rainy1 = "img/rainy-1.svg";
+rainy2 = "img/rainy-2.svg";
+rainy3 = "img/rainy-3.svg";
+rainy4 = "img/rainy-4.svg";
+rainy5 = "img/rainy-5.svg";
+rainy6 = "img/rainy-6.svg";
+rainy7 = "img/rainy-7.svg";
+snowy1 = "img/snowy-1.svg";
+snowy2 = "img/snowy-2.svg";
+snowy3 = "img/snowy-3.svg";
+snowy4 = "img/snowy-4.svg";
+snowy5 = "img/snowy-5.svg";
+snowy6 = "img/snowy-6.svg";
+thunder = "img/thunder.svg";
+weather_sagitarius = "img/weather-sagitarius.svg";
+weather_sunset = "img/weather-sunset.svg";
+weather_sprite = "img/weather-sprite.svg";
+weather = "img/weather.svg";
+
+
+
 
 let giorniSettimana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
 var search = function () {
+  //reset the map
+  document.getElementById('map').innerHTML = "";
+  //reset letfleg map
+  
+
   console.log("searching");
   let input = document.getElementById('searchBar').value
   input = input.toLowerCase();
   if (input == "")
     return;
 
-  let weather = getWeather(input);
+  let weather = getNowWeather(input);
+  let weatherToday = getTodayWeather(input);
   let astronimicInfo = getAstronimicInfo(input);
-
   console.log(weather);
+  console.log(weatherToday);
 
-
-  /*let daydate = [];
-  daydate[0] = weather.list[0].dt_txt;
-  daydate[1] = weather.list[8].dt_txt;
-  daydate[2] = weather.list[16].dt_txt;
-  daydate[3] = weather.list[24].dt_txt;
-  daydate[4] = weather.list[32].dt_txt;
-
-  let day = [];
-  day[0] = giorniSettimana[new Date(daydate[0]).getDay()];
-  day[1] = giorniSettimana[new Date(daydate[1]).getDay()];
-  day[2] = giorniSettimana[new Date(daydate[2]).getDay()];
-  day[3] = giorniSettimana[new Date(daydate[3]).getDay()];
-  day[4] = giorniSettimana[new Date(daydate[4]).getDay()];
-
-  let dayTemp = [];
-  dayTemp[0] = weather.list[0].main.temp;
-  dayTemp[1] = weather.list[8].main.temp;
-  dayTemp[2] = weather.list[16].main.temp;
-  dayTemp[3] = weather.list[24].main.temp;
-  dayTemp[4] = weather.list[32].main.temp;
-
-  let dayTempMin = [];
-  dayTempMin[0] = weather.list[0].main.temp_min;
-  dayTempMin[1] = weather.list[8].main.temp_min;
-  dayTempMin[2] = weather.list[16].main.temp_min;
-  dayTempMin[3] = weather.list[24].main.temp_min;
-  dayTempMin[4] = weather.list[32].main.temp_min;
-
-  let dayTempMax = [];
-  dayTempMax[0] = weather.list[0].main.temp_max;
-  dayTempMax[1] = weather.list[8].main.temp_max;
-  dayTempMax[2] = weather.list[16].main.temp_max;
-  dayTempMax[3] = weather.list[24].main.temp_max;
-  dayTempMax[4] = weather.list[32].main.temp_max;
-
-  let dayHumidity = [];
-  dayHumidity[0] = weather.list[0].main.humidity;
-  dayHumidity[1] = weather.list[8].main.humidity;
-  dayHumidity[2] = weather.list[16].main.humidity;
-  dayHumidity[3] = weather.list[24].main.humidity;
-  dayHumidity[4] = weather.list[32].main.humidity;
-
-  let dayWind = [];
-  dayWind[0] = weather.list[0].wind.speed;
-  dayWind[1] = weather.list[8].wind.speed;
-  dayWind[2] = weather.list[16].wind.speed;
-  dayWind[3] = weather.list[24].wind.speed;
-  dayWind[4] = weather.list[32].wind.speed;
-
-  let dayWeatherId = [];
-  dayWeatherId[0] = weather.list[0].weather[0].id;
-  dayWeatherId[1] = weather.list[8].weather[0].id;
-  dayWeatherId[2] = weather.list[16].weather[0].id;
-  dayWeatherId[3] = weather.list[24].weather[0].id;
-  dayWeatherId[4] = weather.list[32].weather[0].id;
-
-  let sunrise = astronimicInfo.results.sunrise;
-  let sunset = astronimicInfo.results.sunset;
-  let dayLength = astronimicInfo.results.day_length;
-
-
-  const Temp1 = document.getElementById("Temp1");
-  const MaxTemp1 = document.getElementById("MaxTemp1");
-  const MinTemp1 = document.getElementById("MinTemp1");
-  const Humidity1 = document.getElementById("Humidity1");
-  const Wind1 = document.getElementById("Wind1");
-
-  Temp1.innerHTML = Math.round(dayTemp[0] - 273.15) + "°C";
-  MaxTemp1.innerHTML = Math.round(dayTempMax[0] - 273.15) + "°C";
-  MinTemp1.innerHTML = Math.round(dayTempMin[0] - 273.15) + "°C";
-  Humidity1.innerHTML = "Humidity: " + dayHumidity[0] + "%";
-  Wind1.innerHTML = "Wind: " + dayWind[0] + "m/s";
-  
-  changeCard(Math.round(dayTemp[0] - 273.15), "day1", "dayicon1", dayWeatherId[0]);*/
-
-  let daydate = [];
-  let day = [];
-  let dayTemp = [];
-  let dayTempMin = [];
-  let dayTempMax = [];
-  let dayHumidity = [];
-  let dayWind = [];
-  let dayWeatherId = [];
-
-    //get the current day
-    let now = new Date();
-    //add the number of days to the current day
-    now.setDate(now.getDate());
-    //get the day of the week
-    let dayOfWeek = now.getDay();
-    //get the day of the month
-    let dayOfMonth = now.getDate();
-    //get the month
-    let month = now.getMonth() + 1;
-    //get the hours
-    let hours = now.getHours();
-    //get the minutes
-    let minutes = now.getMinutes();
-
-    //if the month is less than 10, add a zero
-    if(month < 10){
-      month = "0" + month;
-    }
-
-    for(var i = 0; i < 5; i++){
-      if(i == 0){
-        //add the zero at the month if it's less than 10
-        console.log("today " + now.getFullYear() + "-" + (month) + "-" + dayOfMonth + " " + hours + ":" + minutes + ":00");
-        daydate[i] = weather.list[0].dt_txt;
-        //how many elements in the array are the current day
-        let count = 0;
-        for(var j = 0; j < weather.list.length; j++){
-          //confront the current day with the day in the array
-          if(weather.list[j].dt_txt.includes(now.getFullYear() + "-" + (month) + "-" + dayOfMonth)){
-            count++;
-          }
-        }
-        
-
-        console.log("count: " + count);
-
-        //get the data from the near future
-        for(var j = 0; j < count; j++){
-          let weatherDate = new Date(weather.list[j].dt_txt);
-          let hoursDiff = Math.abs(weatherDate.getHours() - hours);
-          let minutesDiff = Math.abs(weatherDate.getMinutes() - minutes);
-          if(hoursDiff < 3 && minutesDiff < 60){
-            dayTemp[i] = weather.list[j].main.temp;
-            dayTempMin[i] = weather.list[j].main.temp_min;
-            dayTempMax[i] = weather.list[j].main.temp_max;
-            dayHumidity[i] = weather.list[j].main.humidity;
-            dayWind[i] = weather.list[j].wind.speed;
-            dayWeatherId[i] = weather.list[j].weather[0].id;
-          }
-        }
-      }else{
-        //put the weather of the next days in the array (the weather of the next day is at 12:00)
-        daydate[i] = weather.list[i*8].dt_txt;
-        dayTemp[i] = weather.list[i*8].main.temp;
-        dayTempMin[i] = weather.list[i*8].main.temp_min;
-        dayTempMax[i] = weather.list[i*8].main.temp_max;
-        dayHumidity[i] = weather.list[i*8].main.humidity;
-        dayWind[i] = weather.list[i*8].wind.speed;
-        dayWeatherId[i] = weather.list[i*8].weather[0].id;
-      }
-    }
-
-
-
-
-
-      
-
-
-
-
-  // kap non funziona nulla AAAAAAAA
-
-  let sunrise = astronimicInfo.results.sunrise;
-  let sunset = astronimicInfo.results.sunset;
-  let dayLength = astronimicInfo.results.day_length;
-
-  for(let i = 0; i < 5; i++){
-    console.log(day[i] + " " + dayTemp[i] + " " + dayTempMin[i] + " " + dayTempMax[i] + " " + dayHumidity[i] + " " + dayWind[i] + " " + dayWeatherId[i]);
-    const Temp = document.getElementById("Temp" + (i+1));
-    const MaxTemp = document.getElementById("MaxTemp" + (i+1));
-    const MinTemp = document.getElementById("MinTemp" + (i+1));
-    const Humidity = document.getElementById("Humidity" + (i+1));
-    const Wind = document.getElementById("Wind" + (i+1));
-    const city = document.getElementById("city");
-
-    Temp.innerHTML = Math.round(dayTemp[i] - 273.15) + "°C";
-    MaxTemp.innerHTML = Math.round(dayTempMax[i] - 273.15) + "°C";
-    MinTemp.innerHTML = Math.round(dayTempMin[i] - 273.15) + "°C";
-    Humidity.innerHTML = "Humidity: " + dayHumidity[i] + "%";
-    Wind.innerHTML = "Wind: " + dayWind[i] + "m/s";
-    city.innerHTML = weather.city.name + ", " + weather.city.country;
-    
-    changeCard(Math.round(dayTemp[i] - 273.15), "day" + (i+1), "dayicon" + (i+1), dayWeatherId[i]);
+  let city = weather.name;
+  let country = weather.sys.country;
+  let temp = weather.main.temp;
+  let cod = weather.weather[0].id;
+  //calculate min and max temp from 5 days forecast data (weatherToday)
+  let minTemp = weatherToday.list[0].main.temp_min;
+  let maxTemp = weatherToday.list[0].main.temp_max;
+  for (let i = 1; i < weatherToday.list.length; i++) {
+    if (weatherToday.list[i].main.temp_min < minTemp)
+      minTemp = weatherToday.list[i].main.temp_min;
+    if (weatherToday.list[i].main.temp_max > maxTemp)
+      maxTemp = weatherToday.list[i].main.temp_max;
   }
+  let feelsLike = weather.main.feels_like;
+  let weatherDescription = weather.weather[0].description;
+  let weatherIcon = weather.weather[0].icon;
+  let sunrise = weather.sys.sunrise;
+  let sunset = weather.sys.sunset;
+  let dayLength = astronimicInfo.results.day_length;
+  let lat = weather.coord.lat;
+  let lon = weather.coord.lon;
+  let windSpeed = weather.wind.speed;
+  let windDeg = weather.wind.deg;
+  let humidity = weather.main.humidity;
+  let pressure = weather.main.pressure;
+  let visibility = weather.visibility;
+  let clouds = weather.clouds.all;
+  let timezone = weather.timezone;
+  let date = new Date();
+  let day = date.getDay();
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+  let dayName = giorniSettimana[day];
+  let dayNumber = date.getDate();
+  let month = date.getMonth();
+  let year = date.getFullYear();
+  let time = hour + ":" + minute + ":" + second;
+  let dateText = dayName + " " + dayNumber + "/" + month + "/" + year;
+  //convert time pm format to 24 hours format
+  let sunriseText = convertUnixTime(sunrise);
+  let sunsetText = convertUnixTime(sunset);
+  let windSpeedText = windSpeed + " m/s";
+  let humidityText = humidity + "%";
+  let pressureText = pressure + " hPa";
+  let visibilityText = visibility + " m";
+  let cloudsText = clouds + "%";
+  let latText = lat + "°";
+  let lonText = lon + "°";
+  let tempText = temp + "°C";
+  let minTempText = minTemp + "°C";
+  let maxTempText = maxTemp + "°C";
+  let feelsLikeText = feelsLike + "°C";
+  let weatherDescriptionText = weatherDescription;
+  let weatherIconText = weatherIcon;
+  let cityText = city;
+  let countryText = country;
+
+  document.getElementById('cityName').innerHTML = cityText + ", " + countryText;
+  document.getElementById('date').innerHTML = dateText;
+
+  document.getElementById('sunrise').innerHTML = sunriseText;
+  document.getElementById('sunset').innerHTML = sunsetText;
+  
+  document.getElementById('temp').innerHTML = tempText;
+  document.getElementById('tempMin').innerHTML = minTempText;
+  document.getElementById('tempMax').innerHTML = maxTempText;
+
+  document.getElementById('humidity').innerHTML = humidityText;
+  document.getElementById('wind').innerHTML = windSpeedText;
+  document.getElementById('pressure').innerHTML = pressureText;
+  document.getElementById('clouds').innerHTML = cloudsText;
+  document.getElementById('visibility').innerHTML = visibilityText;
+
+
+  var map = L.map('map').setView([lat, lon], 13);
+  var layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+  map.addLayer(layer);
+
+  document.getElementById('lat').innerHTML = latText;
+  document.getElementById('lon').innerHTML = lonText;
+
+  changeCard(temp, "card", "icon", cod);
+  
+
+
+
+
+  
 }
 
-var getWeather = function (city) {
-  let url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + API_KEY;
+var getNowWeather = function (city) {
+  let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + API_KEY + '&units=metric';
   let req = new XMLHttpRequest();
   req.open('GET', url, false);
   req.send(null);
   let response = JSON.parse(req.responseText);
   return response;
 }
+
+var getTodayWeather = function (city) {
+  let url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + API_KEY + '&units=metric';
+  let req = new XMLHttpRequest();
+  req.open('GET', url, false);
+  req.send(null);
+  let response = JSON.parse(req.responseText);
+  return response;
+}
+
 
 var getAstronimicInfo = function (city) {
   let url = 'https://api.sunrise-sunset.org/json?lat=' + calcLat(city) + '&lng=' + calcLon(city) + '&date=today';
@@ -224,12 +172,12 @@ var getAstronimicInfo = function (city) {
 }
 
 var calcLat = function (city) {
-  let lat = getWeather(city).lat;
+  let lat = getNowWeather(city).lat;
   return lat;
 }
 
 var calcLon = function (city) {
-  let lon = getWeather(city).lon;
+  let lon = getNowWeather(city).lon;
   return lon;
 }
 
@@ -240,6 +188,48 @@ $(document).ready(function () {
     }
   });
 });  
+
+function convertTo24(timeString) {
+  var timeParts = timeString.split(/:|\s/);
+  var hours = parseInt(timeParts[0]);
+  var minutes = parseInt(timeParts[1]);
+  var seconds = parseInt(timeParts[2]);
+  var ampm = timeParts[3];
+
+  if (ampm === "PM" && hours < 12) {
+    hours += 12;
+  }
+  if (ampm === "AM" && hours === 12) {
+    hours = 0;
+  }
+
+  var hour24 = hours.toString().padStart(2, '0');
+  var minute24 = minutes.toString().padStart(2, '0');
+  var second24 = seconds.toString().padStart(2, '0');
+
+  return hour24 + ":" + minute24 + ":" + second24;
+}
+function convertUnixTime(unixTime) {
+  var date = new Date(unixTime * 1000);
+  var hours = date.getHours();
+  var minutes = "0" + date.getMinutes();
+  var seconds = "0" + date.getSeconds();
+  var formattedTime = hours + ':' + minutes.substr(-2);
+  return formattedTime;
+}
+
+function isDayTime(){
+  var date = new Date();
+  var hour = date.getHours();
+  if(hour >= 6 && hour <= 18)
+    {
+      return true;
+    }
+  else
+    {
+      return false;
+    }
+}
 
 var changeCard = function (temp, cardday, iconid, weather) {
   const day = document.getElementById(cardday);
@@ -258,181 +248,126 @@ var changeCard = function (temp, cardday, iconid, weather) {
     }
 
     weather = weather.toString();
-    console.log(weather);
+    //convert weather code to int
+    weather = parseInt(weather);
   switch(weather)
     {
-      case "200":
-        icon.className = thunder;
+      case weather >= 200 && weather < 300:
+        icon.src = thunder;
         break;
-      case "201":
-        icon.className = thunder;
+      case weather >= 300 && weather < 400:
+        icon.src = drizzle;
         break;
-      case "202":
-        icon.className = thunder;
+      case 500:
+        icon.src = rainy2;
         break;
-      case "210":
-        icon.className = thunder;
+      case 501:
+        icon.src = rainy1;
         break;
-      case "211":
-        icon.className = thunder;
+      case 502:
+        icon.src = rainy3;
         break;
-      case "212":
-        icon.className = thunder;
+      case 503:
+        icon.src = rainy3;
         break;
-      case "221":
-        icon.className = thunder;
+      case 504:
+        icon.src = rainy3;
         break;
-      case "230":
-        icon.className = thunder;
+      case 511:
+        icon.src = snowy4;
         break;
-      case "231":
-        icon.className = thunder;
+      case 520:
+        icon.src = rainy4;
         break;
-      case "232":
-        icon.className = thunder;
+      case 521:
+        icon.src = rainy6 ;
         break;
-      case "300":
-        icon.className = drizzle;
+      case 522:
+        icon.src = rainy6;
         break;
-      case "301":
-        icon.className = drizzle;
+      case 531:
+        icon.src = rainy7;
         break;
-      case "302":
-        icon.className = drizzle;
+      case 600:
+        icon.src = snowy4;
         break;
-      case "310":
-        icon.className = drizzle;
+      case 601:
+        icon.src = snowy4;
         break;
-      case "311":
-        icon.className = drizzle;
+      case 602:
+        icon.src = snowy6;
         break;
-      case "312":
-        icon.className = drizzle;
+      case 611:
+        icon.src = snowy4;
         break;
-      case "313":
-        icon.className = drizzle;
+      case 612:
+        icon.src = snowy4;
         break;
-      case "314":
-        icon.className = drizzle;
+      case 613:
+        icon.src = snowy4;
         break;
-      case "321":
-        icon.className = drizzle;
+      case 615:
+        icon.src = snowy5;
         break;
-      case "500":
-        icon.className = rain;
+      case 616:
+        icon.src = snowy5;
         break;
-      case "501":
-        icon.className = rain;
+      case 620:
+        icon.src = snowy4;
         break;
-      case "502":
-        icon.className = rain;
+      case 621:
+        icon.src = snowy4;
         break;
-      case "503":
-        icon.className = rain;
+      case 622:
+        icon.src = snowy6;
         break;
-      case "504":
-        icon.className = rain;
+      case weather >= 700 && weather < 800:
+        icon.src = cloudy;
         break;
-      case "511":
-        icon.className = rain;
+      case 800:
+        if(isDayTime){
+          icon.src = sunny;
+        }
+        else{
+          icon.src = night;
+        }
         break;
-      case "520":
-        icon.className = rain;
+      case 801:
+        if(isDayTime){
+          icon.src = cloudyday1;
+        }
+        else{
+          icon.src = cloudynight1;
+        }
         break;
-      case "521":
-        icon.className = rain;
+      case 802:
+        if(isDayTime){
+          icon.src = cloudyday2;
+        }
+        else{
+          icon.src = cloudynight2;
+        }
         break;
-      case "522":
-        icon.className = rain;
+      case 803:
+        if(isDayTime){
+          icon.src = cloudyday3;
+        }
+        else{
+          icon.src = cloudynight3;
+        }
         break;
-      case "531":
-        icon.className = rain;
-        break;
-      case "600":
-        icon.className = snow;
-        break;
-      case "601":
-        icon.className = snow;
-        break;
-      case "602":
-        icon.className = snow;
-        break;
-      case "611":
-        icon.className = snow;
-        break;
-      case "612":
-        icon.className = snow;
-        break;
-      case "613":
-        icon.className = snow;
-        break;
-      case "615":
-        icon.className = snow;
-        break;
-      case "616":
-        icon.className = snow;
-        break;
-      case "620":
-        icon.className = snow;
-        break;
-      case "621":
-        icon.className = snow;
-        break;
-      case "622":
-        icon.className = snow;
-        break;
-      case "701":
-        icon.className = mist;
-        break;
-      case "711":
-        icon.className = mist;
-        break;
-      case "721":
-        icon.className = mist;
-        break;
-      case "731":
-        icon.className = mist;
-        break;
-      case "741":
-        icon.className = mist;
-        break;
-      case "751":
-        icon.className = mist;
-        break;
-      case "761":
-        icon.className = mist;
-        break;
-      case "762":
-        icon.className = mist;
-        break;
-      case "771":
-        icon.className = mist;
-        break;
-      case "781":
-        icon.className = mist;
-        break;
-      case "800":
-        icon.className = clear;
-        break;
-      case "801":
-        console.log("test");
-        icon.className = clouds;
-        break;
-      case "802":
-        icon.className = clouds;
-        break;
-      case "803":
-        icon.className = clouds;
-        break;
-      case "804":
-        icon.className = clouds;
+      case 804:
+        icon.src = cloudy;
         break;
       default:
-        icon.className = clear;
+        icon.src = sunny;
         break;
-         
-        
-        
+
+
+
+
+
+      
     }
     
 
