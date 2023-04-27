@@ -2,7 +2,6 @@
     --celadon: #1d2d44ff; 
     --prussian-blue: #3e5c76ff; 
     --picos-gray: #3e5c76ff;  
-    --silver-lake-blue: #48cabff; 
     --rich-black: #0d1321ff; 
     --font:  -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -136,12 +135,48 @@ i.fa-search {
 .appearsText {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.titleText {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.1;
     width: 100%;
 }
 
-.appearsText h1 {
+.titleText h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.realTitle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+}
+
+.realTitle i {
+    font-size: 3rem;
+}
+
+.realTitle a {
+    color: var(--rich-black);
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.centralText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.centralText h2, .centralText i {
     font-size: 2.5rem;
     font-weight: 700;
 }
@@ -154,20 +189,12 @@ i.fa-search {
     width: 100%;
 }
 
-.card-body-left {
+.card-body-left, .card-body-right {
     display: flex;
     width: 50%;
     height: 100%;
     padding: 1rem;
-    border-right: 1px solid var(--prussian-blue);
-    flex-direction: column;
-}
-
-.card-body-right {
-    display: flex;
-    width: 50%;
-    height: 100%;
-    padding: 1rem;
+    gap: 1rem;
     flex-direction: column;
 }
 
@@ -190,6 +217,12 @@ i.fa-search {
     font-size: 3rem;
 }
 
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
 .weather {
     display: flex;
     flex-direction: row;
@@ -204,11 +237,6 @@ i.fa-search {
 
 .icon-weather img {
     width: 250px;
-    transition: all 0.5s ease;
-}
-
-.icon-weather img:hover {
-    transform: scale(1.2);
 }
 
 .sun {
@@ -223,6 +251,25 @@ i.fa-search {
 .sun h2 {
     font-size: 1rem;
     font-weight: 700;
+}
+
+.cardtemp, .cardIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+    border: 3px solid var(--rich-black);
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+
+.cardtemp:hover, .cardIcon:hover {
+    transform: scale(1.1);
+    background-color: var(--rich-black);
+    color: var(--prussian-blue);
 }
 
 .temp {
@@ -259,6 +306,7 @@ i.fa-search {
     flex-direction: column;
     border: 3px solid var(--rich-black);
     border-radius: 5px;
+    box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
 }
 
 .info {
@@ -268,6 +316,12 @@ i.fa-search {
     padding: 0.5rem;
     padding: 0.5rem;
     border-bottom: 1px solid var(--rich-black);
+    transition: all 0.5s ease;
+}
+
+.info:hover {
+    background-color: var(--rich-black);
+    color: var(--prussian-blue);
 }
 
 .info h2 {
@@ -290,6 +344,18 @@ i.fa-search {
 .infoI i {
     font-size: 1.5rem;
     margin-left: 0.5rem;
+}
+
+.coordContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 0.5;
+}
+
+.coordIcon i {
+    font-size: 2.5rem;
 }
 
 .coord {
@@ -336,6 +402,10 @@ i.fa-search {
         border-right: none;
     }
 
+    .appearsText {
+        gap: 5rem;
+    }
+
     #cityName {
         line-height: 1.5;
     }
@@ -352,6 +422,7 @@ i.fa-search {
         flex-direction: column;
         height: 100%;
         margin-bottom: 30px;
+        gap: 1rem;
     }
 }
 
