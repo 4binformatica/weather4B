@@ -79,7 +79,6 @@ function suggestCity(query) {
 var search = function () {
   //reset leaflet map and layer before searching
 
-  // Rimuove la classe "hidden" dalla sezione del meteo con un'animazione di fade
   const weatherSection = document.querySelector('#containerAll');
   weatherSection.style.opacity = 0;
   weatherSection.classList.remove('hidden');
@@ -87,7 +86,6 @@ var search = function () {
     weatherSection.style.opacity = 1;
   }, 300);
   
-  // Aggiunge la classe "hidden" alla sezione dei suggerimenti
   document.querySelector('#appearsText').classList.add('hidden');
 
 
