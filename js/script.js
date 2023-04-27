@@ -76,7 +76,7 @@ function suggestCity(query) {
 
 
 
-async function search() {
+function search() {
   console.log("searching");
   let input = document.getElementById('searchBar').value
   input = input.toLowerCase();
@@ -84,9 +84,9 @@ async function search() {
     return;
 
   try {
-    let weather = await getNowWeather(input);
-    let weatherToday = await getTodayWeather(input);
-    let astronimicInfo = await getAstronimicInfo(input);
+    let weather = getNowWeather(input);
+    let weatherToday = getTodayWeather(input);
+    let astronimicInfo = getAstronimicInfo(input);
 
     let city = weather.name;
     let country = weather.sys.country;
@@ -186,6 +186,8 @@ async function search() {
     document.querySelector('#card').classList.add('bgFix');
     document.querySelector('#appearsText').classList.remove('hidden');
   }
+
+  mymap.invalidateSize();
 }
 
 var getNowWeather = function (city) {
@@ -239,7 +241,12 @@ function initMap(lat, lng) {
     mymap.remove();
   }
 
-  mymap = L.map('map').setView([lat, lng], 13);
+  mymap = L.map('map', {
+    center: [lat, lng],
+    zoom: 13,
+    width: "100%",
+    height: "400px"
+  });
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -252,6 +259,7 @@ function initMap(lat, lng) {
 }
 
 function updateMap(lat, lng) {
+  console.log("updateMap");
   if (mymap !== null && marker !== null) {
     mymap.setView([lat, lng], 13);
     marker.setLatLng([lat, lng]);
