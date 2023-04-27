@@ -76,122 +76,114 @@ function suggestCity(query) {
 
 
 
-var search = function () {
-  //reset leaflet map and layer before searching
-
-  const weatherSection = document.querySelector('#containerAll');
-  weatherSection.style.opacity = 0;
-  weatherSection.classList.remove('hidden');
-  setTimeout(() => {
-    weatherSection.style.opacity = 1;
-  }, 300);
-  
-  document.querySelector('#appearsText').classList.add('hidden');
-
-
+async function search() {
   console.log("searching");
   let input = document.getElementById('searchBar').value
   input = input.toLowerCase();
   if (input == "")
     return;
 
-  let weather = getNowWeather(input);
-  let weatherToday = getTodayWeather(input);
-  let astronimicInfo = getAstronimicInfo(input);
-  console.log(weather);
-  console.log(weatherToday);
+  try {
+    let weather = await getNowWeather(input);
+    let weatherToday = await getTodayWeather(input);
+    let astronimicInfo = await getAstronimicInfo(input);
 
-  let city = weather.name;
-  let country = weather.sys.country;
-  let temp = weather.main.temp;
-  let cod = weather.weather[0].id;
-  //calculate min and max temp from 5 days forecast data (weatherToday)
-  let minTemp = weatherToday.list[0].main.temp_min;
-  let maxTemp = weatherToday.list[0].main.temp_max;
-  for (let i = 1; i < weatherToday.list.length; i++) {
-    if (weatherToday.list[i].main.temp_min < minTemp)
-      minTemp = weatherToday.list[i].main.temp_min;
-    if (weatherToday.list[i].main.temp_max > maxTemp)
-      maxTemp = weatherToday.list[i].main.temp_max;
+    let city = weather.name;
+    let country = weather.sys.country;
+    let temp = weather.main.temp;
+    let cod = weather.weather[0].id;
+    //calculate min and max temp from 5 days forecast data (weatherToday)
+    let minTemp = weatherToday.list[0].main.temp_min;
+    let maxTemp = weatherToday.list[0].main.temp_max;
+    for (let i = 1; i < weatherToday.list.length; i++) {
+      if (weatherToday.list[i].main.temp_min < minTemp)
+        minTemp = weatherToday.list[i].main.temp_min;
+      if (weatherToday.list[i].main.temp_max > maxTemp)
+        maxTemp = weatherToday.list[i].main.temp_max;
+    }
+    let feelsLike = weather.main.feels_like;
+    let weatherDescription = weather.weather[0].description;
+    let weatherIcon = weather.weather[0].icon;
+    let sunrise = weather.sys.sunrise;
+    let sunset = weather.sys.sunset;
+    let dayLength = astronimicInfo.results.day_length;
+    let lat = weather.coord.lat;
+    let lon = weather.coord.lon;
+    let windSpeed = weather.wind.speed;
+    let windDeg = weather.wind.deg;
+    let humidity = weather.main.humidity;
+    let pressure = weather.main.pressure;
+    let visibility = weather.visibility;
+    let clouds = weather.clouds.all;
+    let timezone = weather.timezone;
+    let date = new Date();
+    let day = date.getDay();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+    let dayName = giorniSettimana[day];
+    let dayNumber = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let time = hour + ":" + minute + ":" + second;
+    let dateText = dayName + " " + dayNumber + "/" + month + "/" + year;
+    //convert time pm format to 24 hours format
+    let sunriseText = convertUnixTime(sunrise);
+    let sunsetText = convertUnixTime(sunset);
+    let windSpeedText = windSpeed + " m/s";
+    let humidityText = humidity + "%";
+    let pressureText = pressure + " hPa";
+    let visibilityText = visibility + " m";
+    let cloudsText = clouds + "%";
+    let latText = lat + "°";
+    let lonText = lon + "°";
+    let tempText = temp + "°C";
+    let minTempText = minTemp + "°C";
+    let maxTempText = maxTemp + "°C";
+    let feelsLikeText = feelsLike + "°C";
+    let weatherDescriptionText = weatherDescription;
+    let weatherIconText = weatherIcon;
+    let cityText = city;
+    let countryText = country;
+
+    document.getElementById('cityName').innerHTML = cityText + ", " + countryText;
+    document.getElementById('date').innerHTML = dateText;
+
+    document.getElementById('sunrise').innerHTML = sunriseText;
+    document.getElementById('sunset').innerHTML = sunsetText;
+
+    document.getElementById('temp').innerHTML = tempText;
+    document.getElementById('tempMin').innerHTML = minTempText;
+    document.getElementById('tempMax').innerHTML = maxTempText;
+
+    document.getElementById('humidity').innerHTML = humidityText;
+    document.getElementById('wind').innerHTML = windSpeedText;
+    document.getElementById('pressure').innerHTML = pressureText;
+    document.getElementById('clouds').innerHTML = cloudsText;
+    document.getElementById('visibility').innerHTML = visibilityText;
+
+    if (mymap == null) {
+      initMap(lat, lon);
+    }
+    else {
+      updateMap(lat, lon);
+    }
+
+    document.getElementById('lat').innerHTML = latText;
+    document.getElementById('lon').innerHTML = lonText;
+
+    changeCard(temp, "card", "icon", cod);
+
+    // Mostra la sezione del meteo solo se la ricerca ha prodotto risultati validi
+    const weatherSection = document.querySelector('#containerAll');
+    weatherSection.classList.remove('hidden');
+    document.querySelector('#appearsText').classList.add('hidden');
+  } catch (error) {
+    // La ricerca non ha prodotto risultati validi, nasconde la sezione del meteo e mostra un messaggio di errore
+    console.error(error);
+    document.querySelector('#containerAll').classList.add('hidden');
+    document.querySelector('#appearsText').classList.remove('hidden');
   }
-  let feelsLike = weather.main.feels_like;
-  let weatherDescription = weather.weather[0].description;
-  let weatherIcon = weather.weather[0].icon;
-  let sunrise = weather.sys.sunrise;
-  let sunset = weather.sys.sunset;
-  let dayLength = astronimicInfo.results.day_length;
-  let lat = weather.coord.lat;
-  let lon = weather.coord.lon;
-  let windSpeed = weather.wind.speed;
-  let windDeg = weather.wind.deg;
-  let humidity = weather.main.humidity;
-  let pressure = weather.main.pressure;
-  let visibility = weather.visibility;
-  let clouds = weather.clouds.all;
-  let timezone = weather.timezone;
-  let date = new Date();
-  let day = date.getDay();
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
-  let dayName = giorniSettimana[day];
-  let dayNumber = date.getDate();
-  let month = date.getMonth();
-  let year = date.getFullYear();
-  let time = hour + ":" + minute + ":" + second;
-  let dateText = dayName + " " + dayNumber + "/" + month + "/" + year;
-  //convert time pm format to 24 hours format
-  let sunriseText = convertUnixTime(sunrise);
-  let sunsetText = convertUnixTime(sunset);
-  let windSpeedText = windSpeed + " m/s";
-  let humidityText = humidity + "%";
-  let pressureText = pressure + " hPa";
-  let visibilityText = visibility + " m";
-  let cloudsText = clouds + "%";
-  let latText = lat + "°";
-  let lonText = lon + "°";
-  let tempText = temp + "°C";
-  let minTempText = minTemp + "°C";
-  let maxTempText = maxTemp + "°C";
-  let feelsLikeText = feelsLike + "°C";
-  let weatherDescriptionText = weatherDescription;
-  let weatherIconText = weatherIcon;
-  let cityText = city;
-  let countryText = country;
-
-  document.getElementById('cityName').innerHTML = cityText + ", " + countryText;
-  document.getElementById('date').innerHTML = dateText;
-
-  document.getElementById('sunrise').innerHTML = sunriseText;
-  document.getElementById('sunset').innerHTML = sunsetText;
-  
-  document.getElementById('temp').innerHTML = tempText;
-  document.getElementById('tempMin').innerHTML = minTempText;
-  document.getElementById('tempMax').innerHTML = maxTempText;
-
-  document.getElementById('humidity').innerHTML = humidityText;
-  document.getElementById('wind').innerHTML = windSpeedText;
-  document.getElementById('pressure').innerHTML = pressureText;
-  document.getElementById('clouds').innerHTML = cloudsText;
-  document.getElementById('visibility').innerHTML = visibilityText;
-
-  if (mymap == null) {
-    initMap(lat, lon);
-  }
-  else {
-    updateMap(lat, lon);
-  }
-
-  document.getElementById('lat').innerHTML = latText;
-  document.getElementById('lon').innerHTML = lonText;
-
-  changeCard(temp, "card", "icon", cod);
-  
-
-
-
-
-  
 }
 
 var getNowWeather = function (city) {

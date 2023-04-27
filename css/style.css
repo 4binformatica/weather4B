@@ -126,7 +126,8 @@ i.fa-search {
 
 .hidden {
     display: none !important;
-    transition: opacity 0.5s ease-in-out;
+    background-color: var(--prussian-blue) !important;
+    transition: all 0.5s ease-in-out !important;
 }
 
 .appearsText {
@@ -324,6 +325,20 @@ i.fa-search {
         height: 100%;
         flex-direction: column;
         padding: 1rem;
+    }
+
+    .card-body-left, .card-body-right {
+        width: 100%;
+        height: 100%;
+        border-right: none;
+    }
+
+    #cityName {
+        line-height: 1.5;
+    }
+
+    .containerAll {
+        flex-direction: column;
     }
 
     .card-body-left, .card-body-right {
