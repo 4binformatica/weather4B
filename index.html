@@ -18,93 +18,99 @@
         </div>
         <div class="card-container">
             <div class="card" id="card">
-                <div class="card-body-left">
-                    <div class="city">
-                        <div class="cityI">
-                            <i class="fa-solid fa-map-pin"></i>
-                            <h1 id="cityName">cityName</h1>
-                        </div>
-                        <h2 id="date">date</h2>
-                    </div>
-                    <div class="weather-container">
-                        <div class="weather">
-                            <div class="icon-weather">
-                                <img id="icon" src="img/cloudy-day-1.svg" alt="icon">
-                                <div class="sun">
-                                    <div class="sunrise">
-                                        <i class="fa-solid fa-sunrise"></i>
-                                        <h2 id="sunrise">sunrise</h2>
-                                    </div>
-                                    <h2>/</h2>
-                                    <div class="sunset">
-                                        <i class="fa-solid fa-sunset"></i>
-                                        <h2 id="sunset">sunset</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="temp">
-                                <h1 id="temp">temp</h1>
-                                <div class="maxMinTemperature">
-                                    <div class="tempMin">
-                                        <i class="fa-solid fa-temperature-low"></i>
-                                        <h2 id="tempMin">tempMin</h2>
-                                    </div>
-                                    <h2>/</h2>
-                                    <div class="tempMax">
-                                        <i class="fa-solid fa-temperature-high"></i>
-                                        <h2 id="tempMax">tempMax</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="more-info">
-                            <div class="info">
-                                <div class="infoI">
-                                    <i class="fa-solid fa-droplet-percent"></i>
-                                    <strong><h2>Humidity:</h2></strong>
-                                </div>
-                                <h2 id="humidity">humidity</h2>
-                            </div>
-                            <div class="info">
-                                <div class="infoI">
-                                    <i class="fa-solid fa-wind"></i>
-                                    <strong><h2>Wind:</h2></strong>
-                                </div>
-                                <h2 id="wind">wind</h2>
-                            </div>
-                            <div class="info">
-                                <div class="infoI">
-                                    <i class="fa-solid fa-tachometer-alt-average"></i>
-                                    <strong><h2>Pressure:</h2></strong>
-                                </div>                 
-                                <h2 id="pressure">pressure</h2>
-                            </div>
-                            <div class="info">
-                                <div class="infoI">
-                                    <i class="fa-solid fa-cloud"></i>
-                                    <strong><h2>Clouds:</h2></strong>
-                                </div>                        
-                                <h2 id="clouds">clouds</h2>
-                            </div>
-                            <div class="info">
-                                <div class="infoI">
-                                    <i class="fa-solid fa-cloud-fog"></i>
-                                    <strong><h2>Visibility:</h2></strong>
-                                </div>
-                                
-                                <h2 id="visibility">visibility</h2>
-                            </div>
-                        </div>
-                    </div>
+                <div class="appearsText" id="appearsText">
+                    <h1>Search for a city to see the weather...</h1>
                 </div>
-                <div class="card-body-right">
-                    <div class="map">
-                        <div id="map" style="width: 100%; height: 600px;"></div>
+                <div class="containerAll hidden" id="containerAll">
+                    <div class="card-body-left">
+                        <div class="city">
+                            <div class="cityI">
+                                <i class="fa-solid fa-map-pin"></i>
+                                <h1 id="cityName">cityName</h1>
+                            </div>
+                            <h2 id="date">date</h2>
+                        </div>
+                        <div class="weather-container">
+                            <div class="weather">
+                                <div class="icon-weather">
+                                    <img id="icon" src="img/cloudy-day-1.svg" alt="icon">
+                                    <div class="sun">
+                                        <div class="sunrise">
+                                            <i class="fa-solid fa-sunrise"></i>
+                                            <h2 id="sunrise">sunrise</h2>
+                                        </div>
+                                        <h2>/</h2>
+                                        <div class="sunset">
+                                            <i class="fa-solid fa-sunset"></i>
+                                            <h2 id="sunset">sunset</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="temp">
+                                    <h1 id="temp">temp</h1>
+                                    <div class="maxMinTemperature">
+                                        <div class="tempMin">
+                                            <i class="fa-solid fa-temperature-low"></i>
+                                            <h2 id="tempMin">tempMin</h2>
+                                        </div>
+                                        <h2>/</h2>
+                                        <div class="tempMax">
+                                            <i class="fa-solid fa-temperature-high"></i>
+                                            <h2 id="tempMax">tempMax</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="containerinfo">
+                                <div class="more-info">
+                                    <div class="info">
+                                        <div class="infoI">
+                                            <i class="fa-solid fa-droplet-percent"></i>
+                                            <strong><h2>Humidity:</h2></strong>
+                                        </div>
+                                        <h2 id="humidity">humidity</h2>
+                                    </div>
+                                    <div class="info">
+                                        <div class="infoI">
+                                            <i class="fa-solid fa-wind"></i>
+                                            <strong><h2>Wind:</h2></strong>
+                                        </div>
+                                        <h2 id="wind">wind</h2>
+                                    </div>
+                                    <div class="info">
+                                        <div class="infoI">
+                                            <i class="fa-solid fa-tachometer-alt-average"></i>
+                                            <strong><h2>Pressure:</h2></strong>
+                                        </div>                 
+                                        <h2 id="pressure">pressure</h2>
+                                    </div>
+                                    <div class="info">
+                                        <div class="infoI">
+                                            <i class="fa-solid fa-cloud"></i>
+                                            <strong><h2>Clouds:</h2></strong>
+                                        </div>                        
+                                        <h2 id="clouds">clouds</h2>
+                                    </div>
+                                    <div class="info">
+                                        <div class="infoI">
+                                            <i class="fa-solid fa-cloud-fog"></i>
+                                            <strong><h2>Visibility:</h2></strong>
+                                        </div>
+                                        <h2 id="visibility">visibility</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="coord">
-                        <h2 id="lat">lat</h2>
-                        <h2>/</h2>
-                        <h2 id="lon">lon</h2> 
+                    <div class="card-body-right">
+                        <div class="map">
+                            <div id="map" style="width: 100%; height: 600px;"></div>
+                        </div>
+                        <div class="coord">
+                            <h2 id="lat">lat</h2>
+                            <h2>/</h2>
+                            <h2 id="lon">lon</h2> 
+                        </div>
                     </div>
                 </div>
             </div>
