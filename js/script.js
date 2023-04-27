@@ -177,11 +177,13 @@ async function search() {
     // Mostra la sezione del meteo solo se la ricerca ha prodotto risultati validi
     const weatherSection = document.querySelector('#containerAll');
     weatherSection.classList.remove('hidden');
+    document.querySelector('#card').classList.remove('bgFix');
     document.querySelector('#appearsText').classList.add('hidden');
   } catch (error) {
     // La ricerca non ha prodotto risultati validi, nasconde la sezione del meteo e mostra un messaggio di errore
     console.error(error);
     document.querySelector('#containerAll').classList.add('hidden');
+    document.querySelector('#card').classList.add('bgFix');
     document.querySelector('#appearsText').classList.remove('hidden');
   }
 }
