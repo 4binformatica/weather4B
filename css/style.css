@@ -229,6 +229,7 @@ i.fa-search {
     justify-content: space-between;
     align-items: center;
     height: 200px;
+    gap: 1rem;
 }
 
 .icon-weather {
@@ -270,6 +271,10 @@ i.fa-search {
     transform: scale(1.1);
     background-color: var(--rich-black);
     color: var(--prussian-blue);
+}
+
+.divisorIcon i {
+    font-size: 3rem;
 }
 
 .temp {
@@ -389,6 +394,7 @@ i.fa-search {
     .card-container {
         padding: 1rem;
     }
+
     .card {
         width: 100%;
         height: 100%;
@@ -423,6 +429,10 @@ i.fa-search {
         height: 100%;
         margin-bottom: 30px;
         gap: 1rem;
+    }
+
+    .divisorIcon i {
+        transform: rotate(90deg);
     }
 }
 
