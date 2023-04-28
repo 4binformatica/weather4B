@@ -72,8 +72,9 @@ function suggestCity(query) {
     var suggestions = cities.map(city => `${city.name}, ${city.country}`);
     var suggestionSet = {}; // oggetto per tenere traccia dei suggerimenti già generati
     //create a div for each suggestion
-    var div = document.getElementById('suggestionContainer');
-    div.innerHTML = "";
+    var div = $('#suggestionContainer');
+    div.hide().html(""); // nasconde il contenitore prima di aggiungere i suggerimenti
+    var delay = 0; // delay iniziale
     for (let i = 0; i < suggestions.length; i++) {
       let id = suggestionsid[i];
       var suggestion = suggestions[i];
@@ -81,18 +82,17 @@ function suggestCity(query) {
         continue; // se il suggerimento è già stato generato, passa al prossimo
       }
       suggestionSet[suggestion] = true; // aggiunge il suggerimento all'oggetto
-      var divSuggestion = document.createElement('input');
-      divSuggestion.className = 'suggestion';
-      divSuggestion.readOnly = true;
-      divSuggestion.value = suggestion;
-      divSuggestion.newid = id;
-      divSuggestion.addEventListener('click', function () {
-        document.getElementById('searchBar').value = suggestion;
-        div.innerHTML = "";
+      var divSuggestion = $('<input>').addClass('suggestion').attr('readonly', true).attr('value', suggestion).attr('newid', id).attr('data-aos', 'fade-up').attr('data-aos-delay', delay).attr('data-aos-duration', '2000'); // aggiunge gli attributi per l'animazione AOS e imposta la durata a 500 millisecondi
+      divSuggestion.on('click', function () {
+        $('#searchBar').val(suggestion);
+        div.hide();
         search(id);
       });
-      div.appendChild(divSuggestion);
+      div.append(divSuggestion);
+      delay += 100; // aumenta il delay ad ogni suggerimento successivo
     }
+    div.show(); // mostra il contenitore
+    AOS.init(); // inizializza la libreria AOS dopo aver mostrato il contenitore
   });
 }
 
