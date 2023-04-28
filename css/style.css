@@ -47,6 +47,7 @@ body {
 
 .searchBarContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 1rem 0;
@@ -93,6 +94,31 @@ body {
 i.fa-search {
     position: relative;
     right: 30px;
+}
+
+.suggestionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.suggestion {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--prussian-blue);
+    border-radius: 5px;
+    background-color: var(--prussian-blue);
+    color: var(--rich-black);
+    font-family: var(--font);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    opacity: 60%;
+    transition: all 0.5s ease;
 }
 
 .card-container {

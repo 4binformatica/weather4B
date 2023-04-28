@@ -71,6 +71,23 @@ function suggestCity(query) {
     // Usa la lista di città per fornire i suggerimenti di ricerca
     var suggestions = cities.map(city => `${city.name}, ${city.country}`);
     console.log(suggestions);
+    //create a div for each suggestion
+    var div = document.getElementById('suggestionContainer');
+    div.innerHTML = "";
+    for (let i = 0; i < suggestions.length; i++) {
+      console.log(suggestions[i]);
+      var divSuggestion = document.createElement('input');
+      divSuggestion.classList.add('suggestion');
+      divSuggestion.value = suggestions[i];
+      divSuggestion.addEventListener('click', function () {
+        console.log(divSuggestion.value);
+        document.getElementById('searchBar').value = suggestions[i];
+        search();
+      });
+      div.appendChild(divSuggestion);
+    }
+
+
   });
 }
 
@@ -87,6 +104,8 @@ function search() {
     let weather = getNowWeather(input);
     let weatherToday = getTodayWeather(input);
     let astronimicInfo = getAstronimicInfo(input);
+
+    console.log(weather);
 
     let city = weather.name;
     let country = weather.sys.country;
