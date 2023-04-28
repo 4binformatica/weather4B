@@ -38,12 +38,11 @@ let giorniSettimana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', '
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
   var searchBar = document.getElementById('searchBar');
-searchBar.addEventListener('input', function () {
-  console.log(searchBar.value);
-  suggestCity(searchBar.value);
-});
+  searchBar.addEventListener('input', function () {
+    suggestCity(searchBar.value);
+  });
 });
 
 
@@ -55,13 +54,13 @@ function searchCity(query) {
     .then(data => {
       var cities = data.list.map(city => {
         return {
+          id: city.id,
           name: city.name,
           country: city.sys.country,
           lat: city.coord.lat,
           lon: city.coord.lon
         };
       });
-
       return cities;
     });
 }
@@ -69,24 +68,22 @@ function searchCity(query) {
 function suggestCity(query) {
   searchCity(query).then(cities => {
     // Usa la lista di città per fornire i suggerimenti di ricerca
+    var suggestionsid = cities.map(city => `${city.id}`);
     var suggestions = cities.map(city => `${city.name}, ${city.country}`);
-    console.log(suggestions);
     //create a div for each suggestion
     var div = document.getElementById('suggestionContainer');
     div.innerHTML = "";
     for (let i = 0; i < suggestions.length; i++) {
-      console.log(suggestions[i]);
+      let id = suggestionsid[i];
       var divSuggestion = document.createElement('input');
-      divSuggestion.classList.add('suggestion');
+      divSuggestion.className = 'suggestion';
       divSuggestion.readOnly = true;
       divSuggestion.value = suggestions[i];
+      divSuggestion.newid = id;
       divSuggestion.addEventListener('click', function () {
-        console.log(divSuggestion.value);
         document.getElementById('searchBar').value = suggestions[i];
-        //delete all suggestions 
         div.innerHTML = "";
-
-        search(divSuggestion.value);
+        search(id);
       });
       div.appendChild(divSuggestion);
     }
@@ -98,20 +95,18 @@ function suggestCity(query) {
 
 
 function search(input) {
-  console.log("searching");
+  if(input == null)
+    return;
   document.getElementById('suggestionContainer').innerHTML = "";
   input = input.toLowerCase();
   if (input == "")
     return;
 
-    console.log("Input: " + input);
 
   try {
     let weather = getNowWeather(input);
     let weatherToday = getTodayWeather(input);
-    let astronimicInfo = getAstronimicInfo(input);
-
-    console.log(weather);
+    //let astronimicInfo = getAstronimicInfo(input);
 
     let city = weather.name;
     let country = weather.sys.country;
@@ -131,7 +126,7 @@ function search(input) {
     let weatherIcon = weather.weather[0].icon;
     let sunrise = weather.sys.sunrise;
     let sunset = weather.sys.sunset;
-    let dayLength = astronimicInfo.results.day_length;
+    //let dayLength = astronimicInfo.results.day_length;
     let lat = weather.coord.lat;
     let lon = weather.coord.lon;
     let windSpeed = weather.wind.speed;
@@ -213,11 +208,11 @@ function search(input) {
     document.querySelector('#appearsText').classList.remove('hidden');
   }
 
-  
+
 }
 
-var getNowWeather = function (city) {
-  let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + API_KEY + '&units=metric';
+var getNowWeather = function (id) {
+  let url = 'https://api.openweathermap.org/data/2.5/weather?id=' + id + '&appid=' + API_KEY + '&units=metric';
   let req = new XMLHttpRequest();
   req.open('GET', url, false);
   req.send(null);
@@ -225,8 +220,8 @@ var getNowWeather = function (city) {
   return response;
 }
 
-var getTodayWeather = function (city) {
-  let url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + API_KEY + '&units=metric';
+var getTodayWeather = function (id) {
+  let url = 'https://api.openweathermap.org/data/2.5/forecast?id=' + id + '&appid=' + API_KEY + '&units=metric';
   let req = new XMLHttpRequest();
   req.open('GET', url, false);
   req.send(null);
@@ -260,7 +255,7 @@ $(document).ready(function () {
       search($('#searchBar').val());
     }
   });
-});  
+});
 
 function initMap(lat, lng) {
   if (mymap !== null) {
@@ -285,7 +280,6 @@ function initMap(lat, lng) {
 }
 
 function updateMap(lat, lng) {
-  console.log("updateMap");
   if (mymap !== null && marker !== null) {
     mymap.setView([lat, lng], 13);
     marker.setLatLng([lat, lng]);
@@ -321,129 +315,123 @@ function convertUnixTime(unixTime) {
   return formattedTime;
 }
 
-function isDayTime(){
+function isDayTime() {
   var date = new Date();
   var hour = date.getHours();
-  if(hour >= 6 && hour <= 18)
-    {
-      return true;
-    }
-  else
-    {
-      return false;
-    }
+  if (hour >= 6 && hour <= 18) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 var changeCard = function (temp, cardday, iconid, weather) {
   const day = document.getElementById(cardday);
   const icon = document.getElementById(iconid);
-  if(temp > 25)
-    {
-      day.className = "card hot";
-    }
-  else if(temp > 15)
-    {
-      day.className = "card warm";
-    }
-  else if(temp > -5)
-    {
-      day.className = "card cold";
-    }
+  if (temp > 25) {
+    day.className = "card hot";
+  }
+  else if (temp > 15) {
+    day.className = "card warm";
+  }
+  else if (temp > -5) {
+    day.className = "card cold";
+  }
 
-    weather = weather.toString();
-    //convert weather code to int
-    weather = parseInt(weather);
-  switch(weather)
-    {
-      case weather >= 200 && weather < 300:
-        icon.src = thunder;
-        break;
-      case weather >= 300 && weather < 400:
-        icon.src = drizzle;
-        break;
-      case 500:
-        icon.src = rainy2;
-        break;
-      case 501:
-        icon.src = rainy1;
-        break;
-      case 502:
-        icon.src = rainy3;
-        break;
-      case 503:
-        icon.src = rainy3;
-        break;
-      case 504:
-        icon.src = rainy3;
-        break;
-      case 511:
-        icon.src = snowy4;
-        break;
-      case 520:
-        icon.src = rainy4;
-        break;
-      case 521:
-        icon.src = rainy6 ;
-        break;
-      case 522:
-        icon.src = rainy6;
-        break;
-      case 531:
-        icon.src = rainy7;
-        break;
-      case 600:
-        icon.src = snowy4;
-        break;
-      case 601:
-        icon.src = snowy4;
-        break;
-      case 602:
-        icon.src = snowy6;
-        break;
-      case 611:
-        icon.src = snowy4;
-        break;
-      case 612:
-        icon.src = snowy4;
-        break;
-      case 613:
-        icon.src = snowy4;
-        break;
-      case 615:
-        icon.src = snowy5;
-        break;
-      case 616:
-        icon.src = snowy5;
-        break;
-      case 620:
-        icon.src = snowy4;
-        break;
-      case 621:
-        icon.src = snowy4;
-        break;
-      case 622:
-        icon.src = snowy6;
-        break;
-      case weather >= 700 && weather < 800:
-        icon.src = cloudy;
-        break;
-      case 800:
-        icon.src = sunny;
-        break;
-      case 801:
-        icon.src = cloudyday1;
-        break;
-      case 802:
-        icon.src = cloudyday2;
-        break;
-      case 803:
-        icon.src = cloudyday3;
-        break;
-      case 804:
-        icon.src = cloudy;
-        break;
-      default:
-        icon.src = sunny;
-        break;
-    }
+  weather = weather.toString();
+  //convert weather code to int
+  weather = parseInt(weather);
+  switch (weather) {
+    case weather >= 200 && weather < 300:
+      icon.src = thunder;
+      break;
+    case weather >= 300 && weather < 400:
+      icon.src = drizzle;
+      break;
+    case 500:
+      icon.src = rainy2;
+      break;
+    case 501:
+      icon.src = rainy1;
+      break;
+    case 502:
+      icon.src = rainy3;
+      break;
+    case 503:
+      icon.src = rainy3;
+      break;
+    case 504:
+      icon.src = rainy3;
+      break;
+    case 511:
+      icon.src = snowy4;
+      break;
+    case 520:
+      icon.src = rainy4;
+      break;
+    case 521:
+      icon.src = rainy6;
+      break;
+    case 522:
+      icon.src = rainy6;
+      break;
+    case 531:
+      icon.src = rainy7;
+      break;
+    case 600:
+      icon.src = snowy4;
+      break;
+    case 601:
+      icon.src = snowy4;
+      break;
+    case 602:
+      icon.src = snowy6;
+      break;
+    case 611:
+      icon.src = snowy4;
+      break;
+    case 612:
+      icon.src = snowy4;
+      break;
+    case 613:
+      icon.src = snowy4;
+      break;
+    case 615:
+      icon.src = snowy5;
+      break;
+    case 616:
+      icon.src = snowy5;
+      break;
+    case 620:
+      icon.src = snowy4;
+      break;
+    case 621:
+      icon.src = snowy4;
+      break;
+    case 622:
+      icon.src = snowy6;
+      break;
+    case weather >= 700 && weather < 800:
+      icon.src = cloudy;
+      break;
+    case 800:
+      icon.src = sunny;
+      break;
+    case 801:
+      icon.src = cloudyday1;
+      break;
+    case 802:
+      icon.src = cloudyday2;
+      break;
+    case 803:
+      icon.src = cloudyday3;
+      break;
+    case 804:
+      icon.src = cloudy;
+      break;
+    default:
+      icon.src = sunny;
+      break;
+  }
 }
