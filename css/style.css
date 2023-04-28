@@ -116,6 +116,7 @@ i.fa-search {
     background-color: var(--prussian-blue);
     color: var(--rich-black);
     font-family: var(--font);
+    cursor: pointer;
     font-size: 1.2rem;
     line-height: 1.5;
     opacity: 60%;

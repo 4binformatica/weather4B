@@ -78,6 +78,7 @@ function suggestCity(query) {
       console.log(suggestions[i]);
       var divSuggestion = document.createElement('input');
       divSuggestion.classList.add('suggestion');
+      divSuggestion.readOnly = true;
       divSuggestion.value = suggestions[i];
       divSuggestion.addEventListener('click', function () {
         console.log(divSuggestion.value);
