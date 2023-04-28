@@ -252,7 +252,11 @@ var calcLon = function (city) {
 $(document).ready(function () {
   $('#searchBar').on('keydown', function (event) {
     if (event.keyCode === 13) {
-      search($('#searchBar').val());
+      searchCity($('#searchBar').val()).then(cities => {
+        var suggestionsid = cities.map(city => `${city.id}`);
+        let id = suggestionsid[0];
+        search(id);
+      });
     }
   });
 });
