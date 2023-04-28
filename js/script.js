@@ -82,7 +82,10 @@ function suggestCity(query) {
       divSuggestion.addEventListener('click', function () {
         console.log(divSuggestion.value);
         document.getElementById('searchBar').value = suggestions[i];
-        search();
+        //delete all suggestions 
+        div.innerHTML = "";
+
+        search(divSuggestion.value);
       });
       div.appendChild(divSuggestion);
     }
@@ -93,12 +96,14 @@ function suggestCity(query) {
 
 
 
-function search() {
+function search(input) {
   console.log("searching");
-  let input = document.getElementById('searchBar').value
+  document.getElementById('suggestionContainer').innerHTML = "";
   input = input.toLowerCase();
   if (input == "")
     return;
+
+    console.log("Input: " + input);
 
   try {
     let weather = getNowWeather(input);
@@ -198,15 +203,16 @@ function search() {
     weatherSection.classList.remove('hidden');
     document.querySelector('#card').classList.remove('bgFix');
     document.querySelector('#appearsText').classList.add('hidden');
+    mymap.invalidateSize();
   } catch (error) {
     // La ricerca non ha prodotto risultati validi, nasconde la sezione del meteo e mostra un messaggio di errore
-    console.error(error);
+    console.log(error);
     document.querySelector('#containerAll').classList.add('hidden');
     document.querySelector('#card').classList.add('bgFix');
     document.querySelector('#appearsText').classList.remove('hidden');
   }
 
-  mymap.invalidateSize();
+  
 }
 
 var getNowWeather = function (city) {
@@ -250,7 +256,7 @@ var calcLon = function (city) {
 $(document).ready(function () {
   $('#searchBar').on('keydown', function (event) {
     if (event.keyCode === 13) {
-      search();
+      search($('#searchBar').val());
     }
   });
 });  
