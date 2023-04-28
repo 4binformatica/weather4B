@@ -70,25 +70,29 @@ function suggestCity(query) {
     // Usa la lista di città per fornire i suggerimenti di ricerca
     var suggestionsid = cities.map(city => `${city.id}`);
     var suggestions = cities.map(city => `${city.name}, ${city.country}`);
+    var suggestionSet = {}; // oggetto per tenere traccia dei suggerimenti già generati
     //create a div for each suggestion
     var div = document.getElementById('suggestionContainer');
     div.innerHTML = "";
     for (let i = 0; i < suggestions.length; i++) {
       let id = suggestionsid[i];
+      var suggestion = suggestions[i];
+      if (suggestionSet[suggestion]) {
+        continue; // se il suggerimento è già stato generato, passa al prossimo
+      }
+      suggestionSet[suggestion] = true; // aggiunge il suggerimento all'oggetto
       var divSuggestion = document.createElement('input');
       divSuggestion.className = 'suggestion';
       divSuggestion.readOnly = true;
-      divSuggestion.value = suggestions[i];
+      divSuggestion.value = suggestion;
       divSuggestion.newid = id;
       divSuggestion.addEventListener('click', function () {
-        document.getElementById('searchBar').value = suggestions[i];
+        document.getElementById('searchBar').value = suggestion;
         div.innerHTML = "";
         search(id);
       });
       div.appendChild(divSuggestion);
     }
-
-
   });
 }
 

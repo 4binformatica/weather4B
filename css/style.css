@@ -367,7 +367,6 @@ i.fa-search {
     flex-direction: row;
     gap: 1rem;
     padding: 0.5rem;
-    padding: 0.5rem;
     border-bottom: 1px solid var(--rich-black);
     transition: all 0.5s ease;
 }
