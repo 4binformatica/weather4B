@@ -113,7 +113,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
 }
 
 .card {
@@ -134,7 +135,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: background-color 2s ease;
-    box-shadow: 26px 26px 15px -3px rgba(0,0,0,0.1);
+    box-shadow: 21px 21px 0px 0px rgba(0,0,0,0.1);
 }
 
 .bgFix {
@@ -281,7 +282,7 @@ body {
     border: 3px solid var(--rich-black);
     border-radius: 5px;
     padding: 1rem;
-    box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
+    box-shadow: 11px 11px 0px 0px rgba(0,0,0,0.1);
     transition: all 0.5s ease;
 }
 
@@ -329,7 +330,7 @@ body {
     flex-direction: column;
     border: 3px solid var(--rich-black);
     border-radius: 5px;
-    box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
+    box-shadow: 11px 11px 0px 0px rgba(0,0,0,0.1);
 }
 
 .titleInfo {
@@ -406,7 +407,7 @@ body {
 .map {
     border: 3px solid var(--rich-black);
     border-radius: 5px;
-    box-shadow: 0px 0px 15px 13px rgba(0,0,0,0.1);
+    box-shadow: 11px 11px 0px 0px rgba(0,0,0,0.1);
 }
 
 /* CSS per il colore di sfondo della card in base alla temperatura */
