@@ -357,8 +357,8 @@ body {
 }
 
 .info:hover {
-    background-color: var(--prussian-blue);
-    color: var(--rich-black);
+    background-color: var(--rich-black);
+    color: var(--prussian-blue);
 }
 
 .info h2 {
