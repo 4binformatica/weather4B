@@ -1,7 +1,7 @@
 
 ## 🌦️ weather4b
 
-weather4b is a project of the 4b computer science class of the sarrocchi institute.
+weather4b is a project of the 4b computer science class of the "Tito Sarrocchi" Institute.
 
 made with love by Andrea Mercati, Gabriele Capitani, Davide Cafaro, Lorenzo Catoni, Michele Santini of the computer science class 4B of the "Tito Sarrocchi" Institute, of the computer science professor Giuliani Simone.
 
